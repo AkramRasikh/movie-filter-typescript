@@ -7,10 +7,11 @@ const useCalculateLoan = (inBankDeposit: number) => {
   const monthToInterestRatio = 0.2;
   const maxLoanTerm = 60;
   const maxLoanAmount = inBankDeposit * 5;
-  const totalCostOfLoan = loanAmount + loanAmount * monthToInterestRatio;
+  const interestBuildUp = loanAmount * monthToInterestRatio;
+  const totalCostOfLoan = loanAmount + interestBuildUp;
   const interestRate = `${(monthToInterestRatio * loanTerm).toFixed(2)}%`;
 
-  const monthlyPayment = (totalCostOfLoan / 12).toLocaleString('en-GB', {
+  const monthlyPayment = (totalCostOfLoan / loanTerm).toLocaleString('en-GB', {
     style: 'currency',
     currency: 'GBP',
   });
