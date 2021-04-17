@@ -1,26 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { CardPayment, LoanOptions } from './components';
+import useCalculateLoan from './hooks/use-calculate-loan';
 
-function App() {
+const App: React.FC = () => {
+  const inBankDeposit = 10000;
+  const {
+    loanTerm,
+    loanAmount,
+    monthlyPayment,
+    cardPaymentDetails,
+  } = useCalculateLoan(inBankDeposit);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='app'>
+      <h3>Loan Calculator</h3>
+      <CardPayment
+        monthlyPayment={monthlyPayment}
+        cardPaymentDetails={cardPaymentDetails}
+      />
+      <LoanOptions {...loanAmount} />
+      <LoanOptions {...loanTerm} />
     </div>
   );
-}
+};
 
 export default App;
