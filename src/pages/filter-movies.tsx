@@ -12,7 +12,7 @@ const FilterMoviesPage: React.FC<FilterMoviePageProps> = ({
   return (
     <div>
       {movies.map(({ title, vote_average, id }) => (
-        <Grid key={id}>
+        <Grid key={id} data-testid='movie-id'>
           <Typography>{title}</Typography>
           <Typography>{vote_average}</Typography>
         </Grid>
