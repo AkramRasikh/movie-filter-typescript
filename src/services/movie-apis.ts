@@ -2,10 +2,14 @@ import axios from 'axios';
 
 export const getMovies = async () => {
   try {
-    const { data } = await axios.get(
+    const {
+      data: { results },
+    } = await axios.get(
       `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_MOVIE_API_KEY}&language=en-US&page=1`,
     );
-    return data;
+    console.log('results: ', results);
+
+    return results;
   } catch (error) {
     return error;
   }
