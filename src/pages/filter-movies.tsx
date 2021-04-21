@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import { IMovies } from '../App';
 import { Checkbox } from '../components';
+import FilterMoviesCheckBox from './filter-movies-checkbox';
 
 interface FilterMoviePageProps {
   movies: IMovies[];
@@ -50,13 +51,11 @@ const FilterMoviesPage: React.FC<FilterMoviePageProps> = ({
     <Grid container>
       <Grid>
         {ratingsCheckboxMap.map((ratingNumber) => (
-          <Grid key={ratingNumber}>
-            <Checkbox
-              key={ratingNumber}
-              id={ratingNumber}
-              updateFilteredRating={updateFilteredRating}
-            />
-          </Grid>
+          <FilterMoviesCheckBox
+            key={ratingNumber}
+            ratingNumber={ratingNumber}
+            updateFilteredRating={updateFilteredRating}
+          />
         ))}
       </Grid>
       <Grid>
