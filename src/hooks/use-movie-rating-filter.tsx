@@ -26,7 +26,7 @@ const useMovieRatingFilter = (movies: IMovies[]) => {
     }
   };
 
-  return { updateFilteredRating, filteredMovies, filteredRatings };
+  return { updateFilteredRating, filteredMovies };
 };
 
 export default useMovieRatingFilter;

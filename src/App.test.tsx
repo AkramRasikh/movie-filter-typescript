@@ -38,8 +38,7 @@ test('filters through movie items', async () => {
   expect(checkbox8.checked).toEqual(false);
   fireEvent.click(checkbox8);
   expect(checkbox8.checked).toEqual(true);
-  expect(screen.getByText('No movies found')).toBeDefined();
-  expect(screen.queryByText(`Movies found: 0`)).toBeNull();
+  expect(screen.getByText(`Movies found: 0`)).toBeDefined();
   expect(screen.queryAllByTestId('movie-id').length).toBe(0);
   const checkbox7 = screen.getAllByRole('checkbox')[4];
   expect(checkbox7.checked).toEqual(false);
@@ -54,4 +53,3 @@ test('filters through movie items', async () => {
   expect(screen.getAllByTestId('movie-id').length).toBe(10);
   expect(screen.queryByText('Movies found: 10')).toBeDefined();
 });
-// test('shows message "no X star films" if none available', () => {});

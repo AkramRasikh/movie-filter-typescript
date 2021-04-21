@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { makeStyles } from '@material-ui/core/styles';
 import { getMovies } from './services/movie-apis';
-import { Grid, Typography } from '@material-ui/core';
+import { Grid, Typography, CircularProgress } from '@material-ui/core';
 import FilterMovies from './pages/filter-movies';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: 'flex',
-      '& > * + *': {
-        marginLeft: theme.spacing(2),
-      },
+const useStyles = makeStyles(() => ({
+  root: {
+    display: 'flex',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    '& > * + *': {
+      marginLeft: '8px',
     },
-  }),
-);
+  },
+}));
 
 export interface IMovies {
   id: number;
