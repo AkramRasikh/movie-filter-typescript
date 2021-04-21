@@ -21,10 +21,9 @@ const CheckboxField: React.FC<CheckboxFieldProps> = ({
       onChange={handleChange}
       inputProps={{
         'aria-label': 'primary checkbox',
-        role: 'checkbox',
       }}
     />
   );
 };
 
-export default CheckboxField;
+export default React.memo(CheckboxField);

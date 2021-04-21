@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Typography } from '@material-ui/core';
-import { Checkbox } from '../components';
+import { Checkbox } from '../../components';
 
 interface FilterMovieCheckBoxProps {
   ratingNumber: number;
