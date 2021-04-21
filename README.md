@@ -1,46 +1,37 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
 ### `yarn start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Task
 
-### `yarn test`
+Build an app that displays 20 'now playing' movies and add a filter to sort them by rating.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Architecture
 
-### `yarn build`
+The API calls out to the movie service in the separate ‘services’ module. To get a successful response, you will need an API key - which I have stored in an .env file. Failure to do so will be met with an error message on the screen.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Upon successfully retrieving the data, we format it to only hold the relevant parts in state ‘id, vote_average, title, & backdrop_path’ after which is sorted from highest rated and passed down as props into the page ‘filter-movies’.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The page ‘filter-movies’ only acts as a placeholder that renders the ratings checkboxes & search results. We use a hook called ‘useMovieRatingFilter’ that handles all the business logic pertaining to handling selected ratings as well as returning the correct filtered movies.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Separate folder structures are created for components (there is only one!) and hooks and any additions would fit within the respective folders.
 
-### `yarn eject`
+### Tests
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+There are three tests passing covering, the initial render & the order of movies, error handling and the dynamic flow of the search results via filtering.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Scalability
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+The benefit of separating logic into hooks and using the passed down ‘movies’ as the anchor of filtering is the scope to extend filtering by other categories. For example, if we want to implement ‘filter by year’ in conjunction to ratings, we can either extend our business logic in the existing hook or create a new hook. Creating a new hook - the preferred method - would require us to listen in on what type of filter event is happening - i.e. year - invoking the relevant hook.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Potential performance concern
 
-## Learn More
+- We are using ‘Math.floor’ in our hook ‘useMovieRatingFilter’ and as it stands now, it is fine. However, if we have thousands of movies and more extensive filter operations, I would create a ‘roundedRating’ property in the formatMovies function and use ‘Math.floor’ only once for each object. Thereafter, we can reference ‘roundedRating’ in our hook
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Issues
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+I didn’t have as much time to spend on this test as I thought I would and did come across a couple typescript bumps. I am officially a week in to typescript and so wanted to point out a couple issues that I would have looked into a bit more if I had the time.
+
+- Trying to rename vote_average as voteAverage - and the same with backdrop_path - while maintaining the interface’s integrity.
+- I have read mixed things on how to use interfaces & axios requests and wasn’t entirely sure on how to declare the response.

@@ -1,7 +1,12 @@
 import { useState, useEffect } from 'react';
 import { IMovies } from '../App';
 
-const useMovieRatingFilter = (movies: IMovies[]) => {
+interface UseMovieRatingFilterData {
+  updateFilteredRating: (id: number, checked: boolean) => void;
+  filteredMovies: IMovies[];
+}
+
+const useMovieRatingFilter = (movies: IMovies[]): UseMovieRatingFilterData => {
   const [filteredRatings, setFilteredRatings] = useState<number[]>([]);
   const [filteredMovies, setFilteredMovies] = useState<IMovies[]>(movies);
 
@@ -9,8 +14,8 @@ const useMovieRatingFilter = (movies: IMovies[]) => {
     if (filteredRatings.length === 0) {
       setFilteredMovies(movies);
     } else {
-      const updatedMovieState = movies.filter((filteredMovie: IMovies) =>
-        filteredRatings.includes(Math.floor(filteredMovie.vote_average)),
+      const updatedMovieState = movies.filter(({ vote_average }: IMovies) =>
+        filteredRatings.includes(Math.floor(vote_average)),
       );
       setFilteredMovies(updatedMovieState);
     }
@@ -21,12 +26,12 @@ const useMovieRatingFilter = (movies: IMovies[]) => {
       setFilteredRatings((prev) => [...prev, id]);
     } else {
       setFilteredRatings(
-        filteredRatings.filter((ratingNum) => ratingNum !== id),
+        filteredRatings.filter((ratingNumber) => ratingNumber !== id),
       );
     }
   };
 
-  return { updateFilteredRating, filteredMovies };
+  return { filteredMovies, updateFilteredRating };
 };
 
 export default useMovieRatingFilter;

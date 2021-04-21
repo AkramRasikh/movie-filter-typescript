@@ -19,7 +19,7 @@ const useStyles = makeStyles(() => ({
 export interface IMovies {
   id: number;
   vote_average: number;
-  overview: string;
+
   title: string;
   backdrop_path: string;
 }
@@ -33,13 +33,11 @@ const App: React.FC = () => {
   const formatMovies = ({
     id,
     vote_average,
-    overview,
     title,
     backdrop_path,
   }: IMovies) => ({
     id,
     vote_average,
-    overview,
     title,
     backdrop_path: 'https://image.tmdb.org/t/p/w400' + backdrop_path,
   });
