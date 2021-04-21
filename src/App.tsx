@@ -58,7 +58,7 @@ const App: React.FC = () => {
       <CircularProgress />
     </Grid>
   ) : (
-    <FilterMovies movies={movies} />
+    <FilterMovies movies={movies} ratingsSpectrum={10} />
   );
 };
 
